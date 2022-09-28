@@ -1,7 +1,10 @@
-.home_slaid{
+.home_slaid {
     background-image: url("../image/header_img.jpg");
-    background-position: 51.1494% 100%;
-    min-height: 746.797px;
+    min-height: 100vh;
     opacity: 1;
-    background-size:cover;
+    background-size: cover;
+    background-position: center center;
+}
+body{
+    margin: 0;
 }
