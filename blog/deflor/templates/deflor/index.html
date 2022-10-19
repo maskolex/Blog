@@ -1,7 +1,17 @@
 {% extends "deflor/base.html" %}
 
-    {% block header %}
-
-<h1>Главная страница</h1>
-
-    {% endblock header %}
+{% block content %}
+    {% for women in womens %}
+            <div class="row">
+                <div class="col ps-5">
+                    <div class="content_text pb-3 me-5">
+                        <h3 class=""> {{ women.title }} </h3>
+                        <p class="text-break">
+                            {{ women.content|linebreaks|truncatechars:550 }}
+                        </p>
+                        <a href="#" class="btn btn-primary btn-sm" type="button">Читать пост</a>
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
+{% endblock content %}
