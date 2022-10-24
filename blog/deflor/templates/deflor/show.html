@@ -1,0 +1,17 @@
+{% extends "deflor/base.html" %}
+{% block title %}
+{{ womens.title }}
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col ps-5">
+        <div class="pb-3 me-5">
+            <h3 class=""> {{ womens.title }}</h3>
+            <p>
+                {{ womens.content}}
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock content %}
