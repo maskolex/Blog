@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 from deflor.models import *
 
@@ -42,4 +43,7 @@ def show_actor(request, post_number):
 def show_category(request, cat_number):
     women = Women.objects.filter(cat_id=cat_number)
     category = Category.objects.all()
+    if len(women) == 0:
+        raise Http404()
+
     return render(request, "deflor/category.html", {'menu': menu, 'womens': women, 'category': category})
