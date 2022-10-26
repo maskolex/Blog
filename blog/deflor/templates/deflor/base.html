@@ -44,15 +44,11 @@
                 <li class="nav-item ">
                     <a class="nav-link ps-4 active" aria-current="page" href="{% url 'home_page' %}">Все категории</a>
                 </li>
+                {% for cat in category %}
                 <li class="nav-item ">
-                    <a class="nav-link ps-4 active" aria-current="page" href="#">Актрисы</a>
+                    <a class="nav-link ps-4 active" aria-current="page" href="{% url 'category' cat.pk %}">{{ cat.name }}</a>
                 </li>
-                <li class="nav-item ">
-                    <a class="nav-link ps-4 active" aria-current="page" href="#">Певицы</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link ps-4 active" aria-current="page" href="#">Спортсменки</a>
-                </li>
+                {% endfor %}
             </ul>
         </div>
     </div>
@@ -62,9 +58,9 @@
         <div class="col-md-3 pt-5 d-none d-lg-block bg-light bg-gradient">
             <nav class="left-nav">
                 <a class="nav-link active" aria-current="page" href="{% url 'home_page' %}">Все категории</a>
-                <a class="nav-link text-secondary" href="#">Актрисы</a>
-                <a class="nav-link text-secondary" href="#">Певицы</a>
-                <a class="nav-link text-secondary" href="#">Спортсменки</a>
+                {% for cat in category %}
+                <a class="nav-link text-secondary" href="{% url 'category' cat.pk %}">{{ cat.name }}</a>
+                {% endfor %}
                 <div class="canal ps-3 pt-5 text-secondary">Наш канал</div>
                 <img class="ms-3 mt-4 youtube_a" src="{% static 'deflor/image/share_yt.png' %}" alt="Youtube">
             </nav>

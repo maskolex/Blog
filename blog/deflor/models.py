@@ -9,6 +9,12 @@ class Women(models.Model):
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
-
+    cat = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
     def get_absolute_url(self):
         return reverse("show", kwargs={'post_number': self.pk})
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    def get_absolute_url(self):
+        return reverse("category", kwargs={'cat_number': self.pk})
