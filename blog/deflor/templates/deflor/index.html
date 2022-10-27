@@ -10,6 +10,9 @@
         <div class="content_text pb-3 me-5">
             <h3 class=""> {{ women.title }}</h3>
             <p>
+                <img class="img-thumbnail" src="{{women.photo.url}}" alt="{{women.title}}">
+            </p>
+            <p>
                 {{ women.content|linebreaks|truncatechars:550 }}
             </p>
             <div class="d-flex justify-content-end">

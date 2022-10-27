@@ -1,5 +1,8 @@
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+
+from blog import settings
 from deflor.views import *
 
 urlpatterns = [
@@ -11,3 +14,7 @@ urlpatterns = [
     path('post/<int:post_number>', show_actor, name="show"),
     path('category/<int:cat_number>', show_category, name="category"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
