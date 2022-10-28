@@ -1,5 +1,5 @@
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from deflor.models import *
 
 menu = [{'title': 'О Сайте', 'url_name': 'about'},
@@ -35,9 +35,17 @@ def login(request):
 
 
 def show_actor(request, post_number):
-    women = Women.objects.get(pk=post_number)
+    women = get_object_or_404(Women, pk=post_number)
     category = Category.objects.all()
-    return render(request, "deflor/show.html", {'menu': menu, 'womens': women, 'category': category})
+    cat_select = women.cat_id
+    context = {
+        'menu': menu,
+        'womens': women,
+        'category': category,
+        'cat_select': cat_select
+    }
+
+    return render(request, "deflor/show.html", context=context)
 
 
 def show_category(request, cat_number):
@@ -45,5 +53,12 @@ def show_category(request, cat_number):
     category = Category.objects.all()
     if len(women) == 0:
         raise Http404()
+    cat_select = women[0].cat_id
 
-    return render(request, "deflor/category.html", {'menu': menu, 'womens': women, 'category': category})
+    context = {
+        'menu': menu,
+        'womens': women,
+        'category': category,
+        'cat_select': cat_select
+    }
+    return render(request, "deflor/category.html", context=context)

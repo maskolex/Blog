@@ -1,4 +1,5 @@
 {% extends "deflor/base.html" %}
+{% load thumbnail %}
 {% block title %}
     Домашняя страница
 {% endblock title %}
@@ -8,11 +9,13 @@
 <div class="row">
     <div class="col ps-5">
         <div class="content_text pb-3 me-5">
-            <h3 class=""> {{ women.title }}</h3>
-            <img src="{{ women.photo.url }}" alt="{{ women.title }}">
-            <p>
-                {{ women.content|linebreaks|truncatechars:550 }}
-            </p>
+            <h3 class="pb-2 pt-2"> {{ women.title }}</h3>
+            <div class="float-start pe-3">
+                {% thumbnail women.photo "200x200" crop="center" as im %}
+                <img src="{{ im.url }}">
+                {% endthumbnail %}
+            </div>
+            {{ women.content|linebreaks|truncatechars:550 }}
             <div class="d-flex justify-content-end">
                 <a href="{{ women.get_absolute_url }}" class="btn btn-primary btn-sm" type="button">Читать пост</a>
             </div>

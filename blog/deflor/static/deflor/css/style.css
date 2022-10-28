@@ -4,6 +4,7 @@
 .content_text{
     border-bottom: 2px solid darkgray;
 }
-.btn_full{
-
+.block_image{
+    width: 200px;
+    height: 200px;
 }
