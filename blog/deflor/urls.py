@@ -11,8 +11,8 @@ urlpatterns = [
     path('feedback/', feedback, name="feedback"),
     path('add_page/', add_page, name="add_page"),
     path('login/', login, name="login"),
-    path('post/<int:post_number>', show_actor, name="show"),
-    path('category/<int:cat_number>', show_category, name="category"),
+    path('post/<slug:post_slug>', show_actor, name="show"),
+    path('category/<slug:cat_slug>', show_category, name="category"),
 ]
 
 if settings.DEBUG:

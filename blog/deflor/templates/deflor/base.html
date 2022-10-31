@@ -46,7 +46,7 @@
                 </li>
                 {% for cat in category %}
                 <li class="nav-item ">
-                    <a class="nav-link ps-4 active" aria-current="page" href="{% url 'category' cat.pk %}">{{ cat.name
+                    <a class="nav-link ps-4 active" aria-current="page" href="{{ cat.get_absolute_url }}">{{ cat.name
                         }}</a>
                 </li>
                 {% endfor %}
@@ -65,9 +65,9 @@
                 {% endif %}
                 {% for cat in category %}
                 {% if cat.id == cat_select %}
-                <a class="nav-link active" href="{% url 'category' cat.pk %}">{{ cat.name }}</a>
+                <a class="nav-link active" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
                 {% else %}
-                <a class="nav-link text-secondary" href="{% url 'category' cat.pk %}">{{ cat.name }}</a>
+                <a class="nav-link text-secondary" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
                 {% endif %}
                 {% endfor %}
                 <div class="canal ps-3 pt-5 text-secondary">Наш канал</div>

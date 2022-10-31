@@ -16,7 +16,7 @@ class Women(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("show", kwargs={'post_number': self.pk})
+        return reverse("show", kwargs={'post_slug': self.slug})
 
     class Meta:
         verbose_name = "Известные женщины"
@@ -28,7 +28,7 @@ class Category(models.Model):
     slug = models.SlugField(max_length=100, db_index=True, unique=True, null=True, verbose_name="URL")
 
     def get_absolute_url(self):
-        return reverse("category", kwargs={'cat_number': self.pk})
+        return reverse("category", kwargs={'cat_slug': self.slug})
 
     def __str__(self):
         return self.name

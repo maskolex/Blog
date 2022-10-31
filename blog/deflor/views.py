@@ -11,7 +11,11 @@ menu = [{'title': 'О Сайте', 'url_name': 'about'},
 def index(request):
     women = Women.objects.all()
     category = Category.objects.all()
-    return render(request, "deflor/index.html", {'menu': menu, 'womens': women, 'category': category})
+    context = {'menu': menu,
+               'womens': women,
+               'category': category
+               }
+    return render(request, "deflor/index.html", context=context)
 
 
 def about(request):
@@ -34,8 +38,8 @@ def login(request):
     return render(request, "deflor/login.html", {'menu': menu, 'category': category})
 
 
-def show_actor(request, post_number):
-    women = get_object_or_404(Women, pk=post_number)
+def show_actor(request, post_slug):
+    women = get_object_or_404(Women, slug=post_slug)
     category = Category.objects.all()
     cat_select = women.cat_id
     context = {
@@ -48,8 +52,8 @@ def show_actor(request, post_number):
     return render(request, "deflor/show.html", context=context)
 
 
-def show_category(request, cat_number):
-    women = Women.objects.filter(cat_id=cat_number)
+def show_category(request, cat_slug):
+    women = Women.objects.filter(cat__slug=cat_slug)
     category = Category.objects.all()
     if len(women) == 0:
         raise Http404()
