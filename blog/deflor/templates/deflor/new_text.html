@@ -1,8 +1,27 @@
 {% extends 'deflor/base.html' %}
 
 {% block title %}
-    Добавление статьи
+Добавление статьи
 {% endblock title %}
 {% block content %}
-<h3> Добавление новой статьи</h3>
+<form enctype="multipart/form-data" action="add_page" method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        {{ form.title.errors }}
+        <label for="{{ forms.title.id_for_label }}" class="form-label">Имя: </label>
+        {{ forms.title }}
+    </div>
+    <div class="mb-3">
+        {{ form.content.errors }}
+        <label for="{{ forms.content.id_for_label }}" class="form-label">Биография: </label>
+        {{ forms.content }}
+    </div>
+    <div class="mb-3 form-check">
+        {{ form.is_published.errors }}
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="{{ form.is_published.id_for_label }}">Опубликовать: </label>
+        {{ forms.is_published }}
+    </div>
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
 {% endblock content %}
