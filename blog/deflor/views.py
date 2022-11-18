@@ -1,5 +1,5 @@
 from django.http import Http404
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from deflor.forms import AddWomen
 from deflor.models import *
@@ -11,7 +11,7 @@ menu = [{'title': 'О Сайте', 'url_name': 'about'},
 
 
 def index(request):
-    women = Women.objects.all()
+    women = Women.objects.filter(is_published=True)
     category = Category.objects.all()
     context = {'menu': menu,
                'womens': women,
@@ -32,10 +32,11 @@ def feedback(request):
 
 def add_page(request):
     category = Category.objects.all()
-    if request.POST == 'POST':
-        forms = AddWomen(request.POST)
+    if request.method == 'POST':
+        forms = AddWomen(request.POST, request.FILES)
         if forms.is_valid():
             forms.save()
+            return redirect('home_page')
     else:
         forms = AddWomen()
 
