@@ -8,37 +8,37 @@
     {% csrf_token %}
     <div class="row">
         <div class="col-6">
-            {{ form.title.errors }}
+            {{ forms.title.errors }}
             <label for="{{ forms.title.id_for_label }}" class="form-label">Имя: </label>
             {{ forms.title }}
         </div>
     </div>
     <div class="row">
         <div class="col-6">
-            {{ form.slug.errors }}
+            {{ forms.slug.errors }}
             <label for="{{ forms.slug.id_for_label }}" class="form-label">URL: </label>
             {{ forms.slug }}
         </div>
     </div>
     <div class="mb-3">
-        {{ form.content.errors }}
+        {{ forms.content.errors }}
         <label for="{{ forms.content.id_for_label }}" class="form-label">Биография: </label>
         {{ forms.content }}
     </div>
     <div class="mb-3">
-        {{ form.is_published.errors }}
+        {{ forms.is_published.errors }}
         <label for="{{ forms.cat.id_for_label }}" class="form-label">Выберите категорию:</label>
         {{ forms.cat }}
     </div>
     <div class="row">
         <div class="col-6">
-            {{ form.photo.errors }}
+            {{ forms.photo.errors }}
             <label for="{{ forms.photo.id_for_label }}" class="form-label">Выберите фотографию:</label>
             {{ forms.photo }}
         </div>
     </div>
     <div class="mb-3 mt-3 form-check">
-        {{ form.is_published.errors }}
+        {{ forms.is_published.errors }}
         <label class="form-check-label" for="{{ form.is_published.id_for_label }}">Опубликовать </label>
         {{ forms.is_published }}
     </div>
