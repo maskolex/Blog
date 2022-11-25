@@ -17,23 +17,12 @@ class Index(ListView):
     context_object_name = 'womens'
 
     def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
+        # Возвращаем список сформированных обьектов
         context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
+        # Добавляем нужные элементы
         context['category'] = Category.objects.all()
         context['menu'] = menu
         return context
-
-
-# def index(request):
-# women = Women.objects.filter(is_published=True)
-# category = Category.objects.all()
-# context = {'menu': menu,
-#            'womens': women,
-#            'category': category
-#            }
-# return render(request, "deflor/index.html", context=context)
-
 
 def about(request):
     category = Category.objects.all()
