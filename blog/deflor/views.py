@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView
 
 from deflor.forms import AddWomen
 from deflor.models import *
@@ -10,14 +11,28 @@ menu = [{'title': 'О Сайте', 'url_name': 'about'},
         ]
 
 
-def index(request):
-    women = Women.objects.filter(is_published=True)
-    category = Category.objects.all()
-    context = {'menu': menu,
-               'womens': women,
-               'category': category
-               }
-    return render(request, "deflor/index.html", context=context)
+class Index(ListView):
+    model = Women
+    template_name = "deflor/index.html"
+    context_object_name = 'womens'
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['category'] = Category.objects.all()
+        context['menu'] = menu
+        return context
+
+
+# def index(request):
+# women = Women.objects.filter(is_published=True)
+# category = Category.objects.all()
+# context = {'menu': menu,
+#            'womens': women,
+#            'category': category
+#            }
+# return render(request, "deflor/index.html", context=context)
 
 
 def about(request):

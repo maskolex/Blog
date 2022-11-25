@@ -6,7 +6,7 @@ from blog import settings
 from deflor.views import *
 
 urlpatterns = [
-    path('', index, name="home_page"),
+    path('', Index.as_view(), name="home_page"),
     path('about/', about, name="about"),
     path('feedback/', feedback, name="feedback"),
     path('add_page/', add_page, name="add_page"),
