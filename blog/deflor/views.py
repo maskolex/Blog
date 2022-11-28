@@ -22,7 +22,12 @@ class Index(ListView):
         # Добавляем нужные элементы
         context['category'] = Category.objects.all()
         context['menu'] = menu
+        context['title'] = "Главная страница"
         return context
+
+    def get_queryset(self):
+        return Women.objects.filter(is_published=True)
+
 
 def about(request):
     category = Category.objects.all()
@@ -66,17 +71,20 @@ def show_actor(request, post_slug):
     return render(request, "deflor/show.html", context=context)
 
 
-def show_category(request, cat_slug):
-    women = Women.objects.filter(cat__slug=cat_slug)
-    category = Category.objects.all()
-    if len(women) == 0:
-        raise Http404()
-    cat_select = women[0].cat_id
+class ShowCategory(ListView):
+    model = Women
+    template_name = "deflor/category.html"
+    context_object_name = 'womens'
 
-    context = {
-        'menu': menu,
-        'womens': women,
-        'category': category,
-        'cat_select': cat_select
-    }
-    return render(request, "deflor/category.html", context=context)
+    def get_context_data(self, **kwargs):
+        # Возвращаем список сформированных обьектов
+        context = super().get_context_data(**kwargs)
+        # Добавляем нужные элементы
+        context['category'] = Category.objects.all()
+        context['menu'] = menu
+        context['title'] = Category.objects.get(slug=self.kwargs["cat_slug"]).name
+        context['cat_select'] = context['womens'][0].cat_id
+        return context
+
+    def get_queryset(self):
+        return Women.objects.filter(cat__slug=self.kwargs["cat_slug"], is_published=True)
