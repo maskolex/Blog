@@ -57,32 +57,20 @@ def login(request):
     return render(request, "deflor/login.html", {'menu': menu, 'category': category})
 
 
-# class ShowActor(DetailView):
-#     model = Women
-#     template_name = "deflor/show.html"
-    # context_object_name = "womens"
-    # def get_context_data(self, **kwargs):
-    #     # Возвращаем список сформированных обьектов
-    #     context = super().get_context_data(**kwargs)
-    #     # Добавляем нужные элементы
-    #     context['category'] = Category.objects.all()
-    #     context['menu'] = menu
-    #     context['title'] = Category.objects.get(slug=self.kwargs["slug"]).name
-    #     # context['cat_select'] = context['womens'][0].cat_id
-    #     return context
+class ShowActor(DetailView):
+    model = Women
+    template_name = "deflor/show.html"
+    context_object_name = "womens"
 
-def show_actor(request, post_slug):
-    women = get_object_or_404(Women, slug=post_slug)
-    category = Category.objects.all()
-    cat_select = women.cat_id
-    context = {
-        'menu': menu,
-        'womens': women,
-        'category': category,
-        'cat_select': cat_select
-    }
-
-    return render(request, "deflor/show.html", context=context)
+    def get_context_data(self, **kwargs):
+        # Возвращаем список сформированных обьектов
+        context = super().get_context_data(**kwargs)
+        # Добавляем нужные элементы
+        context['category'] = Category.objects.all()
+        context['menu'] = menu
+        context['title'] = "Главная страница"
+        context['cat_select'] = context['womens'].cat_id
+        return context
 
 
 class ShowCategory(ListView):

@@ -11,7 +11,7 @@ urlpatterns = [
     path('feedback/', feedback, name="feedback"),
     path('add_page/', add_page, name="add_page"),
     path('login/', login, name="login"),
-    path('post/<slug:post_slug>', show_actor, name="show"),
+    path('post/<slug:slug>', ShowActor.as_view(), name="show"),
     path('category/<slug:cat_slug>', ShowCategory.as_view(), name="category"),
 ]
 
